@@ -40,3 +40,9 @@ FROM Customer
 JOIN Orders       ON Customer.cId = Orders.cId
 JOIN Order_detail ON Orders.oId = Order_detail.oId
 JOIN Product      ON Order_detail.pId = Product.pId;
+
+-- Hiển thị tên những khách hàng không mua bất kỳ một sản phẩm nào
+SELECT Customer.cId, Customer.cName
+FROM Customer
+LEFT JOIN Orders ON Customer.cId = Orders.cId
+WHERE Orders.oId IS NULL;
