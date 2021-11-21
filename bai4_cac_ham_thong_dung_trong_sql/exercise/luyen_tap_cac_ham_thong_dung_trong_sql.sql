@@ -6,14 +6,14 @@ FROM Subjects
 WHERE Credit = (SELECT MAX(Credit) FROM Subjects );
 
 -- Hiển thị các thông tin môn học có điểm thi lớn nhất.
-SELECT Subjects.SubId ,Subjects.SubName ,Subjects.Credit ,Subjects.Statuss ,MAX(Mark.Mark) AS 'điểm thi lớn nhất'
+SELECT Subjects.Sub_Id ,Subjects.Sub_Name ,Subjects.Credit ,Subjects.Statuss ,MAX(Mark.Mark) AS 'điểm thi lớn nhất'
 FROM Subjects 
-JOIN Mark ON Subjects.SubId = Mark.SubId;
+JOIN Mark ON Subjects.Sub_Id = Mark.Sub_Id;
 
 -- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
-SELECT Students.StudentId ,Students.StudentName ,Students.Address 
+SELECT Students.Student_Id ,Students.Student_Name ,Students.Address 
 ,Students.Phone ,Students.Statuss ,Mark.Mark , AVG (Mark.Mark) AS ' điểm trung bình'
 FROM Students
-JOIN MARK ON Students.StudentId =Mark.StudentId
-GROUP BY Students.StudentId , Students.StudentName
+JOIN MARK ON Students.Student_Id =Mark.Student_Id
+GROUP BY Students.Student_Id , Students.Student_Name
 ORDER BY ' điểm trung bình' DESC;

@@ -8,13 +8,13 @@ SELECT *
 FROM Subjects
 WHERE Credit < 10;
 
-SELECT Students.StudentId, Students.StudentName, Class.ClassName
+SELECT Students.Student_Id, Students.Student_Name, Class.Class_Name
 FROM Students
-JOIN Class ON Students.ClassId = Class.ClassID
-WHERE Class.ClassName = 'A1'; 
+JOIN Class ON Students.Class_Id = Class.Class_Id
+WHERE Class.Class_Name = 'A1'; 
 
-SELECT Students.StudentId, Students.StudentName, Subjects.SubName, Mark.Mark
+SELECT Students.Student_Id, Students.Student_Name, Subjects.Sub_Name, Mark.Mark
 FROM Students 
-JOIN Mark  ON Students.StudentId = Mark.StudentId 
-JOIN Subjects ON Mark.SubId = Subjects.SubId
-WHERE Subjects.SubName = 'CF';
+JOIN Mark  ON Students.Student_Id = Mark.Student_Id 
+JOIN Subjects ON Mark.Sub_Id = Subjects.Sub_Id
+WHERE Subjects.Sub_Name = 'CF';
