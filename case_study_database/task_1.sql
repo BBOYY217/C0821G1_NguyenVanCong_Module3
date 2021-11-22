@@ -78,11 +78,13 @@ INSERT INTO hop_dong(ngay_bat_dau ,ngay_ket_thuc ,tien_dat_coc ,tong_tien ,ma_nh
 VALUES
 ('2021-03-15' ,'2021-03-20', 5000000 , 10000000 , 4 , 2 , 1),
 ('2019-03-15' ,'2019-03-20', 5000000 , 10000000 , 2 , 3 , 1),
+('2019-12-15' ,'2019-12-20', 5000000 , 10000000 , 2 , 3 , 1),
 ('2021-06-20' ,'2021-06-25', 2500000 , 50000000 , 3 , 1 , 2);
 
 INSERT INTO hop_dong_chi_tiet(so_luong ,ma_hop_dong ,ma_dich_vu_di_kem)
 VALUES
 (1,1,3),
+(1,3,3),
 (2,2,5);
 
 
