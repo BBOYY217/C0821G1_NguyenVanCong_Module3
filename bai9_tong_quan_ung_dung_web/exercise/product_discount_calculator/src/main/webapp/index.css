@@ -1,0 +1,11 @@
+form input {
+    width: 300px;
+    height: 40px;
+    margin-top: 50px;
+}
+.submit {
+    color: black;
+    background-color: darkred;
+    width: 150px;
+    height: 40px;
+}
