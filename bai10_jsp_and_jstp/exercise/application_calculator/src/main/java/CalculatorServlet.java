@@ -13,7 +13,7 @@ public class CalculatorServlet extends HttpServlet {
 
         try{
             double result = Calculator.calculate(firstNumber, secondNumber, operator);
-            request.setAttribute("operatorNumer",result);
+            request.setAttribute("result",result);
         }catch (Exception e){
             e.getMessage();
         }

@@ -19,7 +19,7 @@
             <tr>
                 <td>First operand: </td>
                 <td><label>
-                    <input name="first-operand" type="text"/>
+                    <input name="first-number" type="text"/>
                 </label></td>
             </tr>
             <tr>
@@ -38,7 +38,7 @@
             <tr>
                 <td>Second operand: </td>
                 <td><label>
-                    <input name="second-operand" type="text"/>
+                    <input name="second-number" type="text"/>
                 </label></td>
             </tr>
             <tr>
