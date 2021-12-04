@@ -8,7 +8,7 @@ public class Game {
     private String category;
 
     public Game(int id, String name, String version, String mode, String category) {
-        this.id = id;
+        this.id = this.id;
         this.name = name;
         this.version = version;
         this.mode = mode;
@@ -54,4 +54,6 @@ public class Game {
     public void setCategory(String category) {
         this.category = category;
     }
+
+
 }
