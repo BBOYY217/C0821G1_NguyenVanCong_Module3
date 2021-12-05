@@ -15,9 +15,6 @@
 <body>
 <center>
     <h1>Game Management</h1>
-    <h2>
-        <a href="Games?action=Games">List All Game</a>
-    </h2>
 </center>
 <div align="center">
     <form method="post">
@@ -34,7 +31,7 @@
                 <th>Game Name:</th>
                 <td>
                     <input type="text" name="name" size="45"
-                           value="<c:out value='${user.name}' />"
+                           value="<c:out value='${game.name}' />"
                     />
                 </td>
             </tr>

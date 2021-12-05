@@ -9,3 +9,7 @@ versionn VARCHAR(45) NOT NULL,
 modes INT(45) NOT NULL,
 category INT(45) NOT NULL
 );
+
+INSERT INTO game
+VALUES
+("DOOM","1.0","hard","scary,fps")

@@ -15,9 +15,6 @@
 <body>
 <center>
     <h1>Game Management</h1>
-    <h2>
-        <a href="Games?action=create">Add New Game</a>
-    </h2>
 </center>
 <div align="center">
     <table border="1" cellpadding="5">
@@ -37,8 +34,8 @@
                 <td><c:out value="${game.mode}"/></td>
                 <td><c:out value="${game.country}"/></td>
                 <td>
-                    <a href="/users?action=edit&id=${game.id}">Edit</a>
-                    <a href="/users?action=delete&id=${game.id}">Delete</a>
+                    <a href="/games?action=edit&id=${game.id}">Edit</a>
+                    <a href="/games?action=delete&id=${game.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

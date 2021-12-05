@@ -1,130 +1,110 @@
 package controller;
 
-import model.Game;
-import service.GameImpl;
+import model.bean.Game;
+import model.service.GameService;
+import model.service.Impl.GameServiceImpl;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "GameServlet", value = "/Games")
-public class GameServlet extends HttpServlet {
+public class GameServlet {
+    private GameService gameService;
 
-    private GameImpl gameImpl;
+    @WebServlet(name = "GameServlet", urlPatterns = "/games")
+    public class UserServlet extends HttpServlet {
+        private static final long SERIAL_VERSION_UID = 1L;
+        private GameServiceImpl gameService;
 
-    private static final long serialVersionUID = 1L;
-
-    public void init() {
-        gameImpl = new GameImpl();
-    }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
+        public void init() {
+            gameService = new GameServiceImpl();
         }
-        try {
-            switch (action) {
-                case "create":
-                    insertGame(request, response);
-                    break;
-                case "edit":
-                    updateGame(request, response);
-                    break;
+
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            String action = request.getParameter("action");
+            if (action == null) {
+                action = "";
             }
-        } catch (SQLException ex) {
-            throw new ServletException(ex);
-        }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-
-        try {
-            switch (action) {
-                case "create":
-                    showNewForm(request, response);
-                    break;
-                case "edit":
-                    showEditForm(request, response);
-                    break;
-                case "delete":
-                    deleteGame(request, response);
-                    break;
-                default:
-                    listGame(request, response);
-                    break;
+            try {
+                switch (action) {
+                    case "edit":
+                        updateGame(request, response);
+                        break;
+                }
+            }catch (SQLException e) {
+                throw new ServletException(e);
             }
-        } catch (SQLException ex) {
-            throw new ServletException(ex);
+        }
+
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            String action = request.getParameter("action");
+            if (action == null) {
+                action = "";
+            }
+            try {
+                switch (action) {
+                    case "edit":
+                        showEditForm(request, response);
+                        break;
+                    case "delete":
+                        deleteUser(request, response);
+                        break;
+                    default:
+                        listUser(request, response);
+                        break;
+                }
+            }catch (SQLException e){
+                throw new ServletException(e);
+            }
         }
     }
 
-    private void listGame(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        List<Game> listGame = gameImpl.selectAllGame();
-        request.setAttribute("listgame", listGame);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("game/list.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("game/create.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Game existingUser = gameImpl.selectGame(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("game/edit.jsp");
-        request.setAttribute("game", existingUser);
-        dispatcher.forward(request, response);
-    }
-
-    private void deleteGame(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        gameImpl.deleteGame(id);
-
-        List<Game> listGame = gameImpl.selectAllGame();
-        request.setAttribute("listGame", listGame);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("game/list.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void insertGame(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
+    private void updateGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String version = request.getParameter("version");
         String mode = request.getParameter("mode");
         String category = request.getParameter("category");
-        Game newGame = new Game(id, name, version, mode, category);
-        gameImpl.insertGame(newGame);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("game/create.jsp");
+
+        Game gameUpdate = new Game(id, name, version, mode, category);
+        gameService.updateGame(gameUpdate);
+        request.setAttribute("message", "Update successful");
+        request.getRequestDispatcher("user/edit.jsp").forward(request, response);
+    }
+
+
+
+    private void listUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Game> listGame = gameService.selectAllGames();
+        request.setAttribute("listGame", listGame);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("game/list.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void updateGame(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String version = request.getParameter("email");
-        String mode = request.getParameter("country");
-        String category = request.getParameter("category");
+        gameService.deleteGame(id);
 
-        Game games = new Game(id, name, version, mode, category);
-        gameImpl.updateGame(games);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("game/edit.jsp");
+        List<Game> listGame = gameService.selectAllGames();
+        request.setAttribute("listGame", listGame);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("game/list.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Game existingGame = gameService.selectGame(id);
+        request.setAttribute("existingGame", existingGame);
+        request.getRequestDispatcher("game/edit.jsp").forward(request, response);
     }
 }
