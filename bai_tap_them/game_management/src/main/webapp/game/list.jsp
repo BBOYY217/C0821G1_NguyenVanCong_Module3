@@ -13,11 +13,9 @@
     <title>Game Management Application</title>
 </head>
 <body>
-<center>
     <h1>Game Management</h1>
-</center>
-<div align="center">
-    <table border="1" cellpadding="5">
+<div>
+    <table>
         <caption><h2>List of Game</h2></caption>
         <tr>
             <th>ID</th>
@@ -26,16 +24,16 @@
             <th>Mode</th>
             <th>Category</th>
         </tr>
-        <c:forEach var="game" items="${listGame}">
+        <c:forEach var="gameObj" items="${listGame}">
             <tr>
-                <td><c:out value="${game.id}"/></td>
-                <td><c:out value="${game.name}"/></td>
-                <td><c:out value="${game.version}"/></td>
-                <td><c:out value="${game.mode}"/></td>
-                <td><c:out value="${game.country}"/></td>
+                <td><c:out value="${gameObj.id}"/></td>
+                <td><c:out value="${gameObj.name}"/></td>
+                <td><c:out value="${gameObj.version}"/></td>
+                <td><c:out value="${gameObj.mode}"/></td>
+                <td><c:out value="${gameObj.category}"/></td>
                 <td>
-                    <a href="/games?action=edit&id=${game.id}">Edit</a>
-                    <a href="/games?action=delete&id=${game.id}">Delete</a>
+                    <a href="/game_list?action=edit&id=${gameObj.id}">Edit</a>
+                    <a href="/game_list?action=delete&id=${gameObj.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

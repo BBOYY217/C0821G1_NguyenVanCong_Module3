@@ -8,11 +8,14 @@ public class Game {
     private String category;
 
     public Game(int id, String name, String version, String mode, String category) {
-        this.id = this.id;
+        this.id = id;
         this.name = name;
         this.version = version;
         this.mode = mode;
         this.category = category;
+    }
+
+    public Game() {
     }
 
     public int getId() {
