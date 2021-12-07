@@ -24,8 +24,9 @@
     <a href="/subject_list">Back to customer list</a>
 </p>
 <h1>Subject</h1>
-<form method="post">
+<form method="post" action="/subject_list">
         <table>
+            <input type="hidden" value="insert">
             <tr>
                 <td>Name: </td>
                 <td><input type="text" name="name"></td>
@@ -44,7 +45,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Create subject"></td>
+                <td><input type="submit" value="save"></td>
             </tr>
         </table>
 </form>

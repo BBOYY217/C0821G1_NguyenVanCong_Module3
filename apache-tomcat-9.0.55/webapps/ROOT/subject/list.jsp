@@ -17,7 +17,7 @@
 <body>
 
 <h1>Subject Management</h1>
-<a href="/subject_list?action=Insert">Create new subject</a>
+<a href="/subject_list?action=insert">Create new subject</a>
 <div>
     <h2>List of subject</h2>
     <table class="table table-dark table-striped">
@@ -39,7 +39,7 @@
                 <td><c:out value="${subjectObj.mode}"/></td>
                 <td><c:out value="${subjectObj.time}"/></td>
                 <td>
-                    <a href="/subject_list?action=edit&id=${subjectObj.id}">Edit</a>
+                    <a href="/subject_list?action=update&id=${subjectObj.id}">Edit</a>
                     <a href="/subject_list?action=delete&id=${subjectObj.id}">Delete</a>
                 </td>
             </tr>

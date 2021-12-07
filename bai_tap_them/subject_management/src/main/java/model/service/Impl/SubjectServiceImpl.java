@@ -18,4 +18,15 @@ public class SubjectServiceImpl implements SubjectService {
     public boolean insert(Subject subjectObj) {
         return subjectRepository.insert(subjectObj);
     }
+
+    @Override
+    public boolean delete(int id) {
+        return subjectRepository.delete(id);
+    }
+
+    @Override
+    public boolean update(Subject subjectObj) {
+        return subjectRepository.update(subjectObj);
+    }
+
 }

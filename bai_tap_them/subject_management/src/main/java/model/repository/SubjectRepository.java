@@ -8,4 +8,6 @@ import java.util.List;
 public interface SubjectRepository {
     List<Subject> selectAllSubject() throws SQLException;
     boolean insert(Subject subjectObj);
+    boolean delete(int id);
+    boolean update(Subject subjectObj);
 }

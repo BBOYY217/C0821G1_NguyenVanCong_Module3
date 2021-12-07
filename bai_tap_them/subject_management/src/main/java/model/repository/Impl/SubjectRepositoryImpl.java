@@ -50,7 +50,45 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         }catch (SQLException throwables){
             throwables.printStackTrace();
         }
+        return false;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        try{
+            PreparedStatement preparedStatement =
+                    BaseRepository.connection.prepareStatement("DELETE FROM subjects\n" +
+                                                                   "WHERE id = ?");
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean update(Subject subjectObj) {
+        try {
+            PreparedStatement preparedStatement =
+                    BaseRepository.connection.prepareStatement("UPDATE subjects\n" +
+                            "SET namer = ?,versionn = ?, modes = ?, times = ?\n" +
+                            "WHERE id = ?");
+
+            preparedStatement.setString(1,subjectObj.getName());
+            preparedStatement.setString(2,subjectObj.getVersion());
+            preparedStatement.setString(3,subjectObj.getMode());
+            preparedStatement.setString(4, String.valueOf(subjectObj.getTime()));
+            preparedStatement.setInt(5, Integer.parseInt(String.valueOf(subjectObj.getId())));
+            preparedStatement.executeUpdate();
+
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
 
         return false;
     }
+
+
 }
